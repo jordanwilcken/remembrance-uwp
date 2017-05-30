@@ -9,6 +9,7 @@
 
 
     this.start = function () {
+      appConfig.setTheSettings();
       appConfig.initializeDatabase()
         .then(function (val) {
           console.log(val);

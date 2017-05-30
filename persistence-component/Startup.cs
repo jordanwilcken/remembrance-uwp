@@ -18,12 +18,17 @@ namespace persistence_component
 
             if (storageItem == null)
             {
-                string connectionString = await FileIO.ReadTextAsync(
-                    await StorageFile.GetFileFromApplicationUriAsync(
-                        new Uri("ms-appx:///default-connection-string.txt")));
-                string createTablesCommand = await FileIO.ReadTextAsync(
-                    await StorageFile.GetFileFromApplicationUriAsync(
-                        new Uri("ms-appx:///create-tables.sql")));
+                //var localFolder = ApplicationData.Current.LocalFolder;
+                //await localFolder.CreateFileAsync("default-connection-string.txt", CreationCollisionOption.ReplaceExisting);
+                //var file = await localFolder.GetFileAsync("default-connection-string.txt");
+                var settings = ApplicationData.Current.LocalSettings.Values;
+                string connectionString = (string)settings["defaultConnectionString"];
+                string createTablesCommand = (string)settings["createTablesCommand"];
+                //await FileIO.WriteTextAsync(file, connectionString);
+
+                //string createTablesCommand = await FileIO.ReadTextAsync(
+                //    await StorageFile.GetFileFromApplicationUriAsync(
+                //        new Uri("ms-appx:///create-tables.sql")));
 
                 new AppDatabase(connectionString, createTablesCommand);
             }
