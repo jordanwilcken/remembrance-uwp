@@ -67,8 +67,10 @@
     <Content Include="images\StoreLogo.png" />
     <Content Include="images\Wide310x150Logo.scale-200.png" />
     <Content Include="js\appConfig.js" />
+    <Content Include="js\auth.js" />
     <Content Include="js\main.js" />
     <Content Include="css\default.css" />
+    <Content Include="js\models\User.js" />
     <Content Include="js\RemembranceApp.js" />
     <None Include="remembrance_TemporaryKey.pfx" />
   </ItemGroup>

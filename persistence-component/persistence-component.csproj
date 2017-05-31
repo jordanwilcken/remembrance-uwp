@@ -111,6 +111,8 @@
     <Compile Include="AppDatabase.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserDTO.cs" />
+    <Compile Include="UsersRepo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="create-tables.sql">
