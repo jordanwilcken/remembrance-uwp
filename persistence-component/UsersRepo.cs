@@ -1,38 +1,37 @@
 ﻿using Microsoft.Data.Sqlite;
-using Microsoft.Data.Sqlite.Internal;
+using persistence_component.PoorMansGenerics;
+using System;
+using System.Linq;
 
 namespace persistence_component
 {
     public sealed class UsersRepo
     {
-        public UsersRepo()
-        {
+        private Func<IConnection> MakeConnection { get; }
 
+        public UsersRepo(IMakeConnection connectionMaker)
+        {
+            MakeConnection = connectionMaker.MakeConnection;
         }
 
         public UserDTO Get(string username)
         {
-            SqliteEngine.UseWinSqlite3();
-            UserDTO dto;
+             var query = new QueryBuilder()
+               .GetColumns(new string[] { "rowid", "username", "hashed_password" })
+               .From("users")
+               .Where("username = @username")
+               .WithInjectionProtection(
+                    new InjectionProtection(
+                        new SqliteParameter[] {
+                            new SqliteParameter("@username", username)
+                        } ))
+               .BuildQuery();
 
-            using (var connection = new SqliteConnection("Data Source=remembrance.db;"))
-            {
-                connection.Open();
-                using (var command = new SqliteCommand(
-                    "SELECT rowid, username, hashed_password FROM users WHERE username = 'Guest'",
-                    connection))
-                {
-                    var reader = command.ExecuteReader();
-                    reader.Read();
-                    object[] currentRow = new object[reader.FieldCount];
-                    reader.GetValues(currentRow);
-                    dto = new UserDTO { Id = (long)currentRow[0], Name = currentRow[1] as string, HashedPassword = currentRow[2] as string };
-                    //(long)row[0], row[1] as string, row[2] as string
-                }
-                connection.Close();
-            }
+            var dtos = query
+                .RunOnConnection(MakeConnection())
+                .Select(fields => new UserDTO(fields));
 
-            return dto;
+            return dtos.First();
         }
     }
 }

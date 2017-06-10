@@ -109,6 +109,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppDatabase.cs" />
+    <Compile Include="ConnectionInterfaces.cs" />
+    <Compile Include="DataFields.cs" />
+    <Compile Include="PoorMansGenerics\IConvertToFields.cs" />
+    <Compile Include="PoorMansGenerics\IValueConsumer.cs" />
+    <Compile Include="PoorMansGenerics\IMakeConnection.cs" />
+    <Compile Include="InjectionProtection.cs" />
+    <Compile Include="Result.cs" />
+    <Compile Include="SQLiteConnection.cs" />
+    <Compile Include="SQLQuery.cs" />
+    <Compile Include="QueryBuilder.cs" />
+    <Compile Include="QueryBuilderInterfaces.cs" />
+    <Compile Include="QueryResults.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserDTO.cs" />

@@ -14,16 +14,14 @@
       appConfig.initializeDatabase()
         .then(function () {
           loginAsGuest();
-          document.getElementById("remembrance-container").innerHTML = _currentUser.name;
+          document.getElementById("username-display").innerHTML = _currentUser.name;
           //initializeChildApps();
         });
     };
 
     function loginAsGuest() {
-      _currentUser = new remembrance.models.User(
-        new persistence_component.UsersRepo()
-          .get(remembrance.auth.guestName)
-          .name);
+      _currentUser = new persistence_component.UsersRepo(new persistence_component.SQLiteConnectionMaker())
+        .get(remembrance.auth.guestName);
     }
 
     function initializeChildApps() {
