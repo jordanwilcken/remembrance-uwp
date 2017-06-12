@@ -41,7 +41,7 @@ namespace persistence_component
             }
         }
 
-        private SqliteConnection MakeConnection()
+        public static SqliteConnection MakeConnection()
         {
             if (!UsingWinSqlite3)
             {

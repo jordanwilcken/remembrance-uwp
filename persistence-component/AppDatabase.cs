@@ -7,8 +7,7 @@ namespace persistence_component
     {
         public AppDatabase(string connectionString, string createTablesCommand)
         {
-            SqliteEngine.UseWinSqlite3();
-            using (var connection = new SqliteConnection(connectionString))
+            using (var connection = SQLiteConnection.MakeConnection())
             {
                 connection.Open();
                 using (var command = new SqliteCommand(createTablesCommand, connection))

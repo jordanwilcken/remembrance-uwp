@@ -141,6 +141,9 @@
   <PropertyGroup>
     <PostBuildEvent>copy %25userprofile%25\.nuget\packages\microsoft.data.sqlite\1.1.1\lib\netstandard1.3\Microsoft.Data.Sqlite.dll ..\..\..\..\bin\x86\$(ConfigurationName)\AppX\Microsoft.Data.Sqlite.dll</PostBuildEvent>
   </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>if not exist ..\..\..\..\bin\x86\$(ConfigurationName)\AppX mkdir ..\..\..\..\bin\x86\$(ConfigurationName)\AppX</PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
